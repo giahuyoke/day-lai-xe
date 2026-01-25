@@ -13,7 +13,7 @@ export const SITE_CONTENT = {
   },
   stats: {
     students: 1000, // số học viên
-    passRatePercent: 99, // tỷ lệ đậu
+    passRatePercent: 90, // tỷ lệ đậu
   },
   trialOffer: {
     title: "Đăng Ký Học Thử 1 Giờ",

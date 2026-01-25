@@ -83,8 +83,8 @@ const LandingPage = () => {
                   {stats.students}+ Học viên
                 </div>
                 <div className="flex items-center gap-2">
-                  <CheckCircle size={18} className="text-green-500" /> Tỷ lệ đậu{" "}
-                  {stats.passRatePercent}%
+                  <CheckCircle size={18} className="text-green-500" /> Tỷ lệ đậu
+                  ngay lần đầu thi {stats.passRatePercent}%
                 </div>
               </div>
             </div>

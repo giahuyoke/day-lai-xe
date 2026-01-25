@@ -130,7 +130,7 @@ export async function getSiteData(): Promise<SiteData> {
     },
     stats: {
       students: 100,
-      passRatePercent: 99,
+      passRatePercent: 90,
       yearsExperience: 5,
       vehicles: 10,
     },
@@ -273,9 +273,36 @@ export async function getSiteData(): Promise<SiteData> {
         name: "Lê Hoàng Nam",
         rating: 5,
         content:
-          "Đăng ký học cùng bạn được giảm giá. Quy trình chuyên nghiệp, hỗ trợ nhiệt tình.",
+          "Đăng ký học cùng bạn được giảm giá. Quy trình chuyên nghiệp, hỗ trợ nhiệt tình từ A-Z.",
         licenseType: "B2",
         date: "2025-10-05",
+      },
+      {
+        id: "4",
+        name: "Phạm Thị Mai",
+        rating: 5,
+        content:
+          "Lúc đầu mình rất sợ lái xe, nhưng Thầy Tùng kiên nhẫn chỉ từng bước. Giờ mình đã tự tin chạy xe đi làm hàng ngày!",
+        licenseType: "B1",
+        date: "2025-09-18",
+      },
+      {
+        id: "5",
+        name: "Võ Quốc Hùng",
+        rating: 5,
+        content:
+          "Học với Thầy không bị cắt giờ, dạy đến khi nào vững mới cho thi. Đậu 100% sa hình và đường trường!",
+        licenseType: "B2",
+        date: "2025-08-25",
+      },
+      {
+        id: "6",
+        name: "Đỗ Thanh Tâm",
+        rating: 5,
+        content:
+          "Giá cả minh bạch, không phát sinh chi phí như quảng cáo. Thầy còn hỗ trợ làm hồ sơ tận nhà rất tiện.",
+        licenseType: "C",
+        date: "2025-07-10",
       },
     ],
     licenseOptions: [

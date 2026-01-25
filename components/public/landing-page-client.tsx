@@ -16,6 +16,8 @@ import {
   Clock,
   ArrowRight,
   Calendar,
+  Star,
+  Quote,
 } from "lucide-react";
 import type { SiteData } from "@/lib/api/services";
 import { formatCurrencyVND } from "@/lib/api/services";
@@ -535,16 +537,116 @@ const LandingPageClient = ({ data }: LandingPageClientProps) => {
         </div>
       </section>
 
+      {/* === FEEDBACK / TESTIMONIALS === */}
+      <section className="py-20 bg-white">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-16">
+            <p className="text-yellow-600 font-semibold uppercase tracking-wider mb-2">
+              FEEDBACK
+            </p>
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+              Học viên nói gì về{" "}
+              <span className="text-yellow-500">Thầy Tùng</span>?
+            </h2>
+            <p className="text-gray-600 max-w-2xl mx-auto">
+              Hơn {data.stats.students.toLocaleString()}+ học viên đã tin tưởng
+              và đậu bằng lái cùng Thầy Tùng
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+            {data.testimonials.slice(0, 3).map((review) => (
+              <div
+                key={review.id}
+                className="bg-gray-50 rounded-2xl p-6 relative hover:shadow-xl transition-shadow"
+              >
+                {/* Quote icon */}
+                <div className="absolute -top-4 left-6">
+                  <div className="w-10 h-10 bg-yellow-500 rounded-full flex items-center justify-center">
+                    <Quote size={20} className="text-white" />
+                  </div>
+                </div>
+
+                {/* Rating */}
+                <div className="flex gap-1 mb-4 mt-4">
+                  {[...Array(5)].map((_, i) => (
+                    <Star
+                      key={i}
+                      size={18}
+                      className={`${
+                        i < review.rating
+                          ? "text-yellow-500 fill-yellow-500"
+                          : "text-gray-300"
+                      }`}
+                    />
+                  ))}
+                </div>
+
+                {/* Content */}
+                <p className="text-gray-700 mb-6 leading-relaxed italic">
+                  &ldquo;{review.content}&rdquo;
+                </p>
+
+                {/* Author */}
+                <div className="flex items-center gap-3 border-t border-gray-200 pt-4">
+                  <div className="w-12 h-12 bg-yellow-500 rounded-full flex items-center justify-center text-white font-bold text-lg">
+                    {review.name.charAt(0)}
+                  </div>
+                  <div>
+                    <p className="font-bold text-gray-900">{review.name}</p>
+                    <p className="text-sm text-gray-500">
+                      Học viên hạng {review.licenseType} •{" "}
+                      {new Date(review.date).toLocaleDateString("vi-VN", {
+                        month: "long",
+                        year: "numeric",
+                      })}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Stats highlight */}
+          <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto">
+            <div className="text-center p-6 bg-yellow-50 rounded-xl">
+              <div className="text-4xl font-bold text-yellow-600">
+                {data.stats.students.toLocaleString()}+
+              </div>
+              <div className="text-gray-600 text-sm mt-1">Học viên đã đậu</div>
+            </div>
+            <div className="text-center p-6 bg-green-50 rounded-xl">
+              <div className="text-4xl font-bold text-green-600">
+                {data.stats.passRatePercent}%
+              </div>
+              <div className="text-gray-600 text-sm mt-1">
+                Tỷ lệ đậu ngay lần đầu thi
+              </div>
+            </div>
+            <div className="text-center p-6 bg-blue-50 rounded-xl">
+              <div className="text-4xl font-bold text-blue-600">
+                {data.stats.yearsExperience}+
+              </div>
+              <div className="text-gray-600 text-sm mt-1">Năm kinh nghiệm</div>
+            </div>
+            <div className="text-center p-6 bg-purple-50 rounded-xl">
+              <div className="text-4xl font-bold text-purple-600">5.0</div>
+              <div className="text-gray-600 text-sm mt-1 flex items-center justify-center gap-1">
+                <Star size={14} className="text-yellow-500 fill-yellow-500" />{" "}
+                Đánh giá
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* === GALLERY === */}
       <section className="py-20 bg-gray-50">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <p className="text-yellow-600 font-semibold uppercase tracking-wider mb-2">
-              GALLERY
+            <p className="text-yellow-600 text-3xl font-semibold uppercase tracking-wider mb-2">
+              Thư viện ảnh
             </p>
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900">
-              Hình ảnh học lái xe
-            </h2>
           </div>
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
