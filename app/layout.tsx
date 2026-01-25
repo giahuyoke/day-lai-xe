@@ -5,10 +5,97 @@ import { Inter } from "next/font/google";
 const inter = Inter({ subsets: ["latin", "vietnamese"] });
 
 export const metadata: Metadata = {
-  title: "Thầy Tùng - Trung tâm Trường An - Dạy Lái Xe Uy Tín TP.HCM",
+  title: {
+    default: "Lái Xe Thầy Tùng | Dạy Lái Xe Uy Tín Bao Đậu 100% - TP.HCM",
+    template: "%s | Lái Xe Thầy Tùng",
+  },
   description:
-    "Trung tâm đào tạo lái xe B1, B2, C uy tín, tỷ lệ đậu 99%. Học 1 kèm 1 xe đời mới.",
-  keywords: ["dạy lái xe", "học lái xe b2", "thầy Tùng auto", "bổ túc tay lái"],
+    "🏆 Thầy Tùng - Giáo viên dạy lái xe 15+ năm kinh nghiệm. Học 1 kèm 1, cam kết BAO ĐẬU 100%, xe đời mới. Không phát sinh chi phí. Gọi ngay!",
+  icons: {
+    icon: "/logo-vector.png",
+    shortcut: "/logo-vector.png",
+    apple: "/logo-vector.png",
+  },
+  keywords: [
+    "thầy tùng dạy lái xe",
+    "lái xe thầy tùng",
+    "học lái xe b2",
+    "học lái xe b1",
+    "dạy lái xe bao đậu",
+    "học lái xe tphcm",
+    "học lái xe bình tân",
+    "học lái xe 1 kèm 1",
+    "học lái xe cam kết đậu",
+  ],
+  authors: [{ name: "Thầy Tùng - Dạy Lái Xe" }],
+  creator: "Lái Xe Thầy Tùng",
+  publisher: "Lái Xe Thầy Tùng",
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
+  metadataBase: new URL("https://laixethaytung.vn"),
+  openGraph: {
+    type: "website",
+    locale: "vi_VN",
+    siteName: "Lái Xe Thầy Tùng",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+  verification: {
+    // google: "your-google-verification-code",
+  },
+};
+
+// Structured Data for Local Business SEO
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "DrivingSchool",
+  name: "Lái Xe Thầy Tùng",
+  alternateName: "Thầy Tùng Dạy Lái Xe",
+  description:
+    "Thầy Tùng - Giáo viên dạy lái xe uy tín với 15+ năm kinh nghiệm tại TP.HCM. Học 1 kèm 1, cam kết bao đậu 100%, xe đời mới.",
+  url: "https://laixethaytung.vn",
+  telephone: "0909123456",
+  email: "thaytunglaixin@gmail.com",
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: "Quận Bình Tân",
+    addressLocality: "Bình Tân",
+    addressRegion: "TP. Hồ Chí Minh",
+    addressCountry: "VN",
+  },
+  geo: {
+    "@type": "GeoCoordinates",
+    latitude: "10.762622",
+    longitude: "106.660172",
+  },
+  openingHours: "Mo-Su 06:00-21:00",
+  priceRange: "16.000.000đ - 22.000.000đ",
+  aggregateRating: {
+    "@type": "AggregateRating",
+    ratingValue: "5.0",
+    reviewCount: "1500",
+    bestRating: "5",
+  },
+  image: "https://laixethaytung.vn/banner-1.jpg",
+  sameAs: ["https://facebook.com/laixethaytung"],
+  founder: {
+    "@type": "Person",
+    name: "Thầy Tùng",
+    jobTitle: "Giáo viên dạy lái xe",
+  },
+  slogan: "Học lái xe uy tín - Bao đậu 100%",
 };
 
 export default function RootLayout({
@@ -18,6 +105,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="vi">
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+        />
+      </head>
       <body className={inter.className}>{children}</body>
     </html>
   );

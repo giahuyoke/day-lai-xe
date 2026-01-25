@@ -1,17 +1,25 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { Phone, Car, Menu, X } from "lucide-react";
-// import Link from 'next/link';
+import Image from "next/image";
+import { Phone, Menu, X, MapPin, Mail } from "lucide-react";
 
-const Header = () => {
+interface HeaderProps {
+  phoneDisplay?: string;
+  phoneRaw?: string;
+}
+
+const Header = ({
+  phoneDisplay = "0909.123.456",
+  phoneRaw = "0909123456",
+}: HeaderProps) => {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
   const [scrolled, setScrolled] = useState<boolean>(false);
 
   // Xử lý hiệu ứng scroll header
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
+      setScrolled(window.scrollY > 100);
     };
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
@@ -26,88 +34,127 @@ const Header = () => {
   };
 
   const navItems = [
-    { label: "Về chúng tôi", id: "about" },
+    { label: "Trang chủ", id: "hero" },
+    { label: "Về Thầy Tùng", id: "about" },
     { label: "Khóa học", id: "courses" },
-    { label: "Quy trình", id: "process" },
-    { label: "Học phí", id: "pricing" },
+    { label: "Đăng ký", id: "contact" },
   ];
 
   return (
-    <header
-      className={`fixed w-full z-50 transition-all duration-300 ${
-        scrolled ? "bg-white shadow-md py-2" : "bg-transparent py-4"
-      }`}
-    >
-      <div className="container mx-auto px-4 flex justify-between items-center">
-        {/* Logo */}
-        <div
-          className="flex items-center gap-2 cursor-pointer"
-          onClick={() => scrollToSection("hero")}
-        >
-          <div className="bg-blue-600 text-white p-2 rounded-lg">
-            <Car size={24} />
+    <>
+      {/* Top Bar */}
+      <div className="bg-gray-900 text-gray-300 py-2 text-sm hidden md:block">
+        <div className="container mx-auto px-4 flex justify-between items-center">
+          <div className="flex items-center gap-6">
+            <span className="flex items-center gap-2">
+              <MapPin size={14} className="text-yellow-500" />
+              Quận Bình Tân, TP.HCM
+            </span>
+            <span className="flex items-center gap-2">
+              <Mail size={14} className="text-yellow-500" />
+              thaytunglaixin@gmail.com
+            </span>
           </div>
-          <span
-            className={`text-xl font-bold ${
-              scrolled ? "text-gray-900" : "text-blue-900"
-            } md:text-blue-900`}
-          >
-            Thầy Tùng -{" "}
-            <span className="text-blue-600">Trung tâm Trường An</span>
-          </span>
-        </div>
-
-        {/* Desktop Nav */}
-        <nav className="hidden md:flex items-center gap-8">
-          {navItems.map((item, idx) => (
-            <button
-              key={idx}
-              onClick={() => scrollToSection(item.id)}
-              className="font-medium hover:text-blue-600 transition-colors text-gray-700"
+          <div className="flex items-center gap-4">
+            <a
+              href={`tel:${phoneRaw}`}
+              className="flex items-center gap-2 text-yellow-500 font-medium hover:text-yellow-400"
             >
-              {item.label}
-            </button>
-          ))}
-          <button
-            onClick={() => scrollToSection("contact")}
-            className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2.5 rounded-full font-bold transition-transform hover:scale-105 shadow-lg flex items-center gap-2"
-          >
-            <Phone size={18} /> 0909.123.456
-          </button>
-        </nav>
-
-        {/* Mobile Menu Button */}
-        <button
-          className="md:hidden p-2 text-gray-700"
-          onClick={() => setIsMenuOpen(!isMenuOpen)}
-        >
-          {isMenuOpen ? <X size={28} /> : <Menu size={28} />}
-        </button>
+              <Phone size={14} />
+              Gọi Thầy Tùng: {phoneDisplay}
+            </a>
+          </div>
+        </div>
       </div>
 
-      {/* Mobile Nav Menu */}
-      {isMenuOpen && (
-        <div className="absolute top-full left-0 w-full bg-white shadow-xl border-t md:hidden animate-fade-in-down">
-          <div className="flex flex-col p-4 gap-4">
+      {/* Main Header */}
+      <header
+        className={`w-full z-50 transition-all duration-300 ${
+          scrolled
+            ? "fixed top-0 bg-white shadow-lg py-3"
+            : "relative bg-white py-4"
+        }`}
+      >
+        <div className="container mx-auto px-4 flex justify-between items-center">
+          {/* Logo */}
+          <div
+            className="flex items-center gap-3 cursor-pointer"
+            onClick={() => scrollToSection("hero")}
+          >
+            <div className="relative w-14 h-14">
+              <Image
+                src="/logo.png"
+                alt="Logo Lái Xe Thầy Tùng"
+                className="object-contain"
+                fill
+              />
+            </div>
+            <div className="hidden sm:block">
+              <span className="text-xl font-bold text-gray-900">Thầy Tùng</span>
+              <span className="text-yellow-600 text-xs block">
+                Trung Tâm Trường An
+              </span>
+            </div>
+          </div>
+
+          {/* Desktop Nav */}
+          <nav className="hidden lg:flex items-center gap-8">
             {navItems.map((item, idx) => (
               <button
                 key={idx}
                 onClick={() => scrollToSection(item.id)}
-                className="text-left font-medium py-2 border-b border-gray-100 text-gray-800"
+                className="font-medium hover:text-yellow-600 transition-colors text-gray-700 uppercase text-sm tracking-wide"
               >
                 {item.label}
               </button>
             ))}
-            <button
-              onClick={() => scrollToSection("contact")}
-              className="bg-blue-600 text-white py-3 rounded-lg font-bold text-center w-full"
+          </nav>
+
+          {/* CTA Button */}
+          <div className="hidden md:flex items-center gap-4">
+            <a
+              href={`tel:${phoneRaw}`}
+              className="bg-yellow-500 hover:bg-yellow-600 text-gray-900 px-6 py-3 rounded-lg font-bold transition-all flex items-center gap-2 shadow-lg"
             >
-              Đăng ký ngay
-            </button>
+              <Phone size={18} />
+              Gọi ngay
+            </a>
           </div>
+
+          {/* Mobile Menu Button */}
+          <button
+            className="lg:hidden p-2 text-gray-700"
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            aria-label="Toggle menu"
+          >
+            {isMenuOpen ? <X size={28} /> : <Menu size={28} />}
+          </button>
         </div>
-      )}
-    </header>
+
+        {/* Mobile Nav Menu */}
+        {isMenuOpen && (
+          <div className="absolute top-full left-0 w-full bg-white shadow-xl border-t lg:hidden">
+            <div className="flex flex-col p-4 gap-2">
+              {navItems.map((item, idx) => (
+                <button
+                  key={idx}
+                  onClick={() => scrollToSection(item.id)}
+                  className="text-left font-medium py-3 px-4 rounded-lg hover:bg-gray-50 text-gray-800"
+                >
+                  {item.label}
+                </button>
+              ))}
+              <a
+                href={`tel:${phoneRaw}`}
+                className="bg-yellow-500 text-gray-900 py-3 rounded-lg font-bold text-center w-full flex items-center justify-center gap-2 mt-2"
+              >
+                <Phone size={18} /> Gọi: {phoneDisplay}
+              </a>
+            </div>
+          </div>
+        )}
+      </header>
+    </>
   );
 };
 

@@ -33,13 +33,13 @@ export const SITE_CONTENT = {
     packages: [
       {
         code: "B1",
-        title: "Hạng B1",
+        title: "Hạng B số tự động",
         tagline: "Số tự động - Dễ học nhất",
         priceVND: 18000000,
         highlight: false,
         buttonText: "Đăng Ký B1",
         features: [
-          "Xe Vios đời mới 2023",
+          "Xe Honda Civic",
           "Chạy DAT 710km (bắt buộc)",
           "Học sa hình thô & cảm ứng",
           "Bao trọn gói lệ phí thi",
@@ -47,16 +47,16 @@ export const SITE_CONTENT = {
       },
       {
         code: "B2",
-        title: "Hạng B2",
+        title: "Hạng B số sàn",
         tagline: "Số sàn - Chuyên nghiệp",
         priceVND: 16000000,
         highlight: true,
         badge: "HOT",
         buttonText: "Đăng Ký B2 Ngay",
         features: [
-          "Xe Vios số sàn đời mới",
+          "Xe Xpander số sàn đời mới",
           "Chạy DAT 810km (bắt buộc)",
-          "Bằng lái xe kinh doanh Grab/Taxi",
+          "Bằng lái xe kinh doanh Grab/Taxi (tuỳ chọn thêm)",
           "Hỗ trợ trả góp 0%",
         ],
       },
@@ -68,7 +68,7 @@ export const SITE_CONTENT = {
         highlight: false,
         buttonText: "Đăng Ký Hạng C",
         features: [
-          "Học lái xe tải Isuzu/Thaco",
+          "Học lái xe tải Hynhdai/Isuzu",
           "Thời gian học 6 tháng",
           "Bằng lái xe tải trên 3.5 tấn",
           "Cam kết vững tay nghề",
