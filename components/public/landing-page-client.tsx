@@ -110,7 +110,7 @@ const LandingPageClient = ({ data }: LandingPageClientProps) => {
     },
     {
       icon: <GraduationCap className="w-12 h-12" />,
-      title: "15+ năm kinh nghiệm",
+      title: "5+ năm kinh nghiệm",
       desc: "Kinh nghiệm giảng dạy thực tế, am hiểu mọi ngóc ngách của kỳ thi sát hạch",
     },
   ];
@@ -342,11 +342,8 @@ const LandingPageClient = ({ data }: LandingPageClientProps) => {
       <section id="courses" className="py-20 bg-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <p className="text-yellow-600 font-semibold uppercase tracking-wider mb-2">
-              PRICING PLANS
-            </p>
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              Chọn khoá học của bạn
+            <h2 className="text-3xl md:text-4xl font-bold text-yellow-600 mb-4">
+              Các khoá học
             </h2>
           </div>
 
@@ -362,7 +359,7 @@ const LandingPageClient = ({ data }: LandingPageClientProps) => {
               >
                 {pkg.badge && (
                   <div className="absolute top-4 right-4 bg-red-500 text-white text-xs font-bold px-3 py-1 rounded-full z-10">
-                    Giảm 2 triệu
+                    {pkg.badge}
                   </div>
                 )}
 
@@ -388,7 +385,7 @@ const LandingPageClient = ({ data }: LandingPageClientProps) => {
 
                   <div className="flex items-center gap-2 text-gray-600 mb-4 text-sm">
                     <Calendar size={16} />
-                    <span>Khai giảng 25/01</span>
+                    <span>Khai giảng hàng tháng</span>
                   </div>
 
                   <ul className="space-y-3 mb-6">
@@ -541,9 +538,6 @@ const LandingPageClient = ({ data }: LandingPageClientProps) => {
       <section className="py-20 bg-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <p className="text-yellow-600 font-semibold uppercase tracking-wider mb-2">
-              FEEDBACK
-            </p>
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
               Học viên nói gì về{" "}
               <span className="text-yellow-500">Thầy Tùng</span>?
@@ -675,7 +669,7 @@ const LandingPageClient = ({ data }: LandingPageClientProps) => {
             <div className="md:col-span-1">
               <div className="relative w-40 h-16 mb-4">
                 <Image
-                  src="/logo-vector.png"
+                  src="/logo.png"
                   alt="Logo Lái Xe Thầy Tùng"
                   fill
                   className="object-contain"

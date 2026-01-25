@@ -10,7 +10,7 @@ export const metadata: Metadata = {
     template: "%s | Lái Xe Thầy Tùng",
   },
   description:
-    "🏆 Thầy Tùng - Giáo viên dạy lái xe 15+ năm kinh nghiệm. Học 1 kèm 1, cam kết BAO ĐẬU 100%, xe đời mới. Không phát sinh chi phí. Gọi ngay!",
+    "🏆 Thầy Tùng - Giáo viên dạy lái xe 5+ năm kinh nghiệm. Học 1 kèm 1, cam kết BAO ĐẬU 100%, xe đời mới. Không phát sinh chi phí. Gọi ngay!",
   icons: {
     icon: "/logo-vector.png",
     shortcut: "/logo-vector.png",
@@ -64,9 +64,9 @@ const structuredData = {
   name: "Lái Xe Thầy Tùng",
   alternateName: "Thầy Tùng Dạy Lái Xe",
   description:
-    "Thầy Tùng - Giáo viên dạy lái xe uy tín với 15+ năm kinh nghiệm tại TP.HCM. Học 1 kèm 1, cam kết bao đậu 100%, xe đời mới.",
+    "Thầy Tùng - Giáo viên dạy lái xe uy tín với 5+ năm kinh nghiệm tại TP.HCM. Học 1 kèm 1, cam kết bao đậu 100%, xe đời mới.",
   url: "https://laixethaytung.vn",
-  telephone: "0909123456",
+  telephone: "0964940495",
   email: "thaytunglaixin@gmail.com",
   address: {
     "@type": "PostalAddress",

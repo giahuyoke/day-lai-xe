@@ -15,8 +15,8 @@ interface FooterProps {
 }
 
 const Footer = ({ contact }: FooterProps) => {
-  const phoneRaw = contact?.phoneRaw || "0909123456";
-  const zaloPhone = contact?.zaloPhone || "0909123456";
+  const phoneRaw = contact?.phoneRaw || "0964940495";
+  const zaloPhone = contact?.zaloPhone || "0964940495";
   const facebookUrl =
     contact?.facebookUrl || "https://facebook.com/laixethaytung";
 

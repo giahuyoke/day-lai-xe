@@ -4,7 +4,7 @@ import LandingPageServer from "@/components/public/landing-page-server";
 export const metadata: Metadata = {
   title: "Lái Xe Thầy Tùng | Dạy Lái Xe Uy Tín Bao Đậu 100% - TP.HCM",
   description:
-    "🏆 Thầy Tùng - Giáo viên dạy lái xe 15+ năm kinh nghiệm tại TP.HCM. Học 1 kèm 1, cam kết BAO ĐẬU 100%, xe đời mới 2024. Không phát sinh chi phí. Gọi ngay: 0909.123.456",
+    "🏆 Thầy Tùng - Giáo viên dạy lái xe 5+ năm kinh nghiệm tại TP.HCM. Học 1 kèm 1, cam kết BAO ĐẬU 100%, xe đời mới 2024. Không phát sinh chi phí. Gọi ngay: 0964.940.495",
   keywords: [
     "thầy tùng dạy lái xe",
     "lái xe thầy tùng",
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Lái Xe Thầy Tùng | Dạy Lái Xe Uy Tín Bao Đậu 100%",
     description:
-      "🏆 Thầy Tùng - 15+ năm kinh nghiệm dạy lái xe. Học 1 kèm 1, cam kết BAO ĐẬU 100%, xe đời mới. Gọi ngay: 0909.123.456",
+      "🏆 Thầy Tùng - 5+ năm kinh nghiệm dạy lái xe. Học 1 kèm 1, cam kết BAO ĐẬU 100%, xe đời mới. Gọi ngay: 0964.940.495",
     images: ["/banner-1.jpg"],
     type: "website",
     locale: "vi_VN",
@@ -34,7 +34,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Lái Xe Thầy Tùng | Dạy Lái Xe Bao Đậu 100% - TP.HCM",
     description:
-      "Thầy Tùng - 15+ năm kinh nghiệm. Học 1 kèm 1, cam kết đậu 100%, xe đời mới.",
+      "Thầy Tùng - 5+ năm kinh nghiệm. Học 1 kèm 1, cam kết đậu 100%, xe đời mới.",
     images: ["/banner-1.jpg"],
   },
   robots: {

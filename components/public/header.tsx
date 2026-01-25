@@ -10,8 +10,8 @@ interface HeaderProps {
 }
 
 const Header = ({
-  phoneDisplay = "0909.123.456",
-  phoneRaw = "0909123456",
+  phoneDisplay = "0964.940.495",
+  phoneRaw = "0964940495",
 }: HeaderProps) => {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
   const [scrolled, setScrolled] = useState<boolean>(false);
@@ -48,7 +48,7 @@ const Header = ({
           <div className="flex items-center gap-6">
             <span className="flex items-center gap-2">
               <MapPin size={14} className="text-yellow-500" />
-              Quận Bình Tân, TP.HCM
+              Trương Thị Hoa, Quận 12, TP.HCM
             </span>
             <span className="flex items-center gap-2">
               <Mail size={14} className="text-yellow-500" />
