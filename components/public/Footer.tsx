@@ -1,11 +1,13 @@
 import React from "react";
-import { Phone, MapPin } from "lucide-react";
+import { Phone } from "lucide-react";
 
 interface FooterProps {
   contact?: {
     phoneDisplay?: string;
     phoneRaw?: string;
     zaloPhone?: string;
+    hotlineDisplay?: string;
+    hotlineRaw?: string;
     address?: string;
     trainingAddress?: string;
     email?: string;
@@ -17,6 +19,7 @@ interface FooterProps {
 const Footer = ({ contact }: FooterProps) => {
   const phoneRaw = contact?.phoneRaw || "0964940495";
   const zaloPhone = contact?.zaloPhone || "0964940495";
+  const hotlineRaw = contact?.hotlineRaw || "1900123456";
   const facebookUrl =
     contact?.facebookUrl || "https://facebook.com/laixethaytung";
 
@@ -66,13 +69,11 @@ const Footer = ({ contact }: FooterProps) => {
       <div className="fixed bottom-0 left-0 w-full bg-white border-t border-gray-200 md:hidden z-50 shadow-lg safe-area-pb">
         <div className="grid grid-cols-4 divide-x divide-gray-200">
           <a
-            href="https://maps.google.com"
-            target="_blank"
-            rel="noreferrer"
+            href={`tel:${hotlineRaw}`}
             className="flex flex-col items-center justify-center py-3 text-gray-600 hover:text-yellow-600"
           >
-            <MapPin size={20} />
-            <span className="text-xs mt-1">Map</span>
+            <Phone size={20} />
+            <span className="text-xs mt-1">Hotline</span>
           </a>
           <a
             href={`tel:${phoneRaw}`}

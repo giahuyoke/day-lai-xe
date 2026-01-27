@@ -1,6 +1,9 @@
 import { Metadata } from "next";
 import LandingPageServer from "@/components/public/landing-page-server";
 
+// Force dynamic rendering để fetch data từ Redis
+export const dynamic = "force-dynamic";
+
 export const metadata: Metadata = {
   title: "Lái Xe Thầy Tùng | Dạy Lái Xe Uy Tín Bao Đậu 100% - TP.HCM",
   description:

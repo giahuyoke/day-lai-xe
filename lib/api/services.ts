@@ -19,6 +19,8 @@ export interface ContactInfo {
   phoneRaw: string;
   phoneDisplay: string;
   zaloPhone: string;
+  hotlineRaw: string;
+  hotlineDisplay: string;
   address: string;
   trainingAddress: string;
   email: string;
@@ -148,6 +150,8 @@ const defaultSiteData: SiteData = {
     phoneRaw: "0964940495",
     phoneDisplay: "0964.940.495",
     zaloPhone: "0964940495",
+    hotlineRaw: "1900123456",
+    hotlineDisplay: "1900.123.456",
     address: "151 Trương Thị Hoa, Quận 12, TP.HCM",
     trainingAddress: "Sân tập lái KDC Tên Lửa, Bình Tân",
     email: "thaytunglaixin@gmail.com",
@@ -368,6 +372,8 @@ const defaultSiteData: SiteData = {
     },
   ],
   licenseOptions: [
+    "A1 - Xe máy (Phổ biến)",
+    "A - Xe máy (Trên 125cc)",
     "B1 - Số tự động (Phổ biến)",
     "B2 - Số sàn (Chuyên nghiệp)",
     "C - Xe tải",
@@ -404,6 +410,16 @@ export async function getSiteData(): Promise<SiteData> {
     // Fallback to default data on error
     return defaultSiteData;
   }
+}
+
+/**
+ * Wrapper function với cache cho static generation
+ * Sử dụng cho các trang cần pre-render
+ */
+export async function getSiteDataCached(): Promise<SiteData> {
+  // Return default data for static generation
+  // Data sẽ được fetch lại ở runtime
+  return defaultSiteData;
 }
 
 /**

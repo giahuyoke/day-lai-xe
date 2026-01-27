@@ -226,6 +226,16 @@ export default function AdminDashboardPage() {
                   onChange={(v) => updateField("contact.zaloPhone", v)}
                 />
                 <InputField
+                  label="Hotline (hiển thị)"
+                  value={siteData.contact.hotlineDisplay}
+                  onChange={(v) => updateField("contact.hotlineDisplay", v)}
+                />
+                <InputField
+                  label="Hotline (gọi)"
+                  value={siteData.contact.hotlineRaw}
+                  onChange={(v) => updateField("contact.hotlineRaw", v)}
+                />
+                <InputField
                   label="Email"
                   value={siteData.contact.email}
                   onChange={(v) => updateField("contact.email", v)}

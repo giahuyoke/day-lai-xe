@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import {
   Phone,
   CheckCircle,
@@ -18,9 +19,23 @@ import {
   Calendar,
   Star,
   Quote,
+  Eye,
 } from "lucide-react";
 import type { SiteData } from "@/lib/api/services";
 import { formatCurrencyVND } from "@/lib/api/services";
+
+// Helper function to get course URL from code
+const getCourseUrl = (code: string): string => {
+  const urlMap: Record<string, string> = {
+    A1: "/khoa-hoc/bang-a1",
+    A: "/khoa-hoc/bang-a",
+    B1: "/khoa-hoc/bang-b1",
+    B2: "/khoa-hoc/bang-b2",
+    C: "/khoa-hoc/bang-c",
+    "Bổ túc tay lái": "/khoa-hoc/bo-tuc-tay-lai",
+  };
+  return urlMap[code] || "/khoa-hoc";
+};
 
 interface LandingPageClientProps {
   data: SiteData;
@@ -403,16 +418,25 @@ const LandingPageClient = ({ data }: LandingPageClientProps) => {
                     ))}
                   </ul>
 
-                  <button
-                    onClick={() => handleScrollTo("contact")}
-                    className={`w-full py-3 rounded-lg font-bold transition-all ${
-                      pkg.highlight
-                        ? "bg-yellow-500 hover:bg-yellow-600 text-gray-900"
-                        : "bg-gray-900 hover:bg-gray-800 text-white"
-                    }`}
-                  >
-                    Đăng ký ngay
-                  </button>
+                  <div className="space-y-3">
+                    <button
+                      onClick={() => handleScrollTo("contact")}
+                      className={`w-full py-3 rounded-lg font-bold transition-all ${
+                        pkg.highlight
+                          ? "bg-yellow-500 hover:bg-yellow-600 text-gray-900"
+                          : "bg-gray-900 hover:bg-gray-800 text-white"
+                      }`}
+                    >
+                      Đăng ký ngay
+                    </button>
+                    <Link
+                      href={getCourseUrl(pkg.code)}
+                      className="w-full py-3 rounded-lg font-medium transition-all border-2 border-gray-200 hover:border-yellow-500 hover:text-yellow-600 text-gray-600 flex items-center justify-center gap-2"
+                    >
+                      <Eye size={18} />
+                      Xem chi tiết
+                    </Link>
+                  </div>
                 </div>
               </div>
             ))}
@@ -662,6 +686,105 @@ const LandingPageClient = ({ data }: LandingPageClientProps) => {
         </div>
       </section>
 
+      {/* === LOCATION MAP === */}
+      <section className="py-16 bg-gray-50">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-10">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+              Địa Chỉ <span className="text-yellow-500">Liên Hệ</span>
+            </h2>
+            <p className="text-gray-600 max-w-2xl mx-auto">
+              Ghé thăm văn phòng hoặc sân tập để được tư vấn trực tiếp
+            </p>
+          </div>
+
+          <div className="grid lg:grid-cols-3 gap-8 items-start">
+            {/* Map */}
+            <div className="lg:col-span-2 rounded-2xl overflow-hidden shadow-xl">
+              <iframe
+                src="https://maps.google.com/maps?q=151%20%C4%90.Tr%C6%B0%C6%A1ng%20Th%E1%BB%8B%20Hoa%2C%20Hi%E1%BB%87p%20Th%C3%A0nh%2C%20Qu%E1%BA%ADn%2012%2C%20Th%C3%A0nh%20ph%E1%BB%91%20H%E1%BB%93%20Ch%C3%AD%20Minh&t=&z=15&ie=UTF8&iwloc=&output=embed"
+                width="100%"
+                height="400"
+                style={{ border: 0 }}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                title="Địa chỉ Lái Xe Thầy Tùng"
+                className="w-full"
+              />
+            </div>
+
+            {/* Address Info Cards */}
+            <div className="space-y-4">
+              <div className="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow">
+                <div className="flex items-start gap-4">
+                  <div className="w-12 h-12 bg-yellow-100 rounded-full flex items-center justify-center flex-shrink-0">
+                    <MapPin className="w-6 h-6 text-yellow-600" />
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-gray-900 mb-1">
+                      Phòng Ghi Danh
+                    </h4>
+                    <p className="text-gray-600 text-sm">{contact.address}</p>
+                    <a
+                      href="https://maps.app.goo.gl/3wZux7dD1SS8oogRA"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="inline-flex items-center gap-1 text-yellow-600 hover:text-yellow-700 text-sm font-medium mt-2"
+                    >
+                      Xem trên Google Maps <ArrowRight size={14} />
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+              <div className="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow">
+                <div className="flex items-start gap-4">
+                  <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0">
+                    <GraduationCap className="w-6 h-6 text-green-600" />
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-gray-900 mb-1">
+                      Sân Tập Lái
+                    </h4>
+                    <p className="text-gray-600 text-sm">
+                      {contact.trainingAddress}
+                    </p>
+                    <a
+                      href="https://maps.app.goo.gl/TqnfG9RSBuUy6gfg8"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="inline-flex items-center gap-1 text-yellow-600 hover:text-yellow-700 text-sm font-medium mt-2"
+                    >
+                      Xem trên Google Maps <ArrowRight size={14} />
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+              <div className="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow">
+                <div className="flex items-start gap-4">
+                  <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0">
+                    <Clock className="w-6 h-6 text-blue-600" />
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-gray-900 mb-1">
+                      Giờ Làm Việc
+                    </h4>
+                    <p className="text-gray-600 text-sm">
+                      {contact.workingHours}
+                    </p>
+                    <p className="text-green-600 text-sm font-medium mt-1">
+                      ✓ Mở cửa cả T7, CN & Lễ
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* === CONTACT INFO === */}
       <section className="py-16 bg-white border-t border-gray-100">
         <div className="container mx-auto px-4">
@@ -697,10 +820,19 @@ const LandingPageClient = ({ data }: LandingPageClientProps) => {
                 <li className="flex items-center gap-2">
                   <Phone size={18} className="text-yellow-500" />
                   <a
+                    href={`tel:${contact.hotlineRaw}`}
+                    className="hover:text-yellow-600"
+                  >
+                    Hotline: {contact.hotlineDisplay}
+                  </a>
+                </li>
+                <li className="flex items-center gap-2">
+                  <Phone size={18} className="text-yellow-500" />
+                  <a
                     href={`tel:${contact.phoneRaw}`}
                     className="hover:text-yellow-600"
                   >
-                    Hotline: {contact.phoneDisplay}
+                    Zalo/ĐT: {contact.phoneDisplay}
                   </a>
                 </li>
                 <li className="flex items-center gap-2">

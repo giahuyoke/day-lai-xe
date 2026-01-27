@@ -7,11 +7,15 @@ import { Phone, Menu, X, MapPin, Mail } from "lucide-react";
 interface HeaderProps {
   phoneDisplay?: string;
   phoneRaw?: string;
+  hotlineDisplay?: string;
+  hotlineRaw?: string;
 }
 
 const Header = ({
   phoneDisplay = "0964.940.495",
   phoneRaw = "0964940495",
+  hotlineDisplay = "1900.123.456",
+  hotlineRaw = "1900123456",
 }: HeaderProps) => {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
   const [scrolled, setScrolled] = useState<boolean>(false);
@@ -57,11 +61,19 @@ const Header = ({
           </div>
           <div className="flex items-center gap-4">
             <a
+              href={`tel:${hotlineRaw}`}
+              className="flex items-center gap-2 text-yellow-500 font-medium hover:text-yellow-400"
+            >
+              <Phone size={14} />
+              Hotline: {hotlineDisplay}
+            </a>
+            <span className="text-gray-500">|</span>
+            <a
               href={`tel:${phoneRaw}`}
               className="flex items-center gap-2 text-yellow-500 font-medium hover:text-yellow-400"
             >
               <Phone size={14} />
-              Gọi Thầy Tùng: {phoneDisplay}
+              Zalo/ĐT: {phoneDisplay}
             </a>
           </div>
         </div>

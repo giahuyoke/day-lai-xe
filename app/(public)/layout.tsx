@@ -3,6 +3,9 @@ import Header from "@/components/public/header";
 import Footer from "@/components/public/Footer";
 import { getContactInfo } from "@/lib/api/services";
 
+// Force dynamic rendering để fetch data từ Redis
+export const dynamic = "force-dynamic";
+
 interface PublicLayoutProps {
   children: React.ReactNode;
 }
@@ -13,7 +16,12 @@ export default async function PublicLayout({ children }: PublicLayoutProps) {
 
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col font-sans text-gray-800">
-      <Header phoneDisplay={contact.phoneDisplay} phoneRaw={contact.phoneRaw} />
+      <Header
+        phoneDisplay={contact.phoneDisplay}
+        phoneRaw={contact.phoneRaw}
+        hotlineDisplay={contact.hotlineDisplay}
+        hotlineRaw={contact.hotlineRaw}
+      />
       <main className="flex-grow">{children}</main>
       <Footer contact={contact} />
     </div>
