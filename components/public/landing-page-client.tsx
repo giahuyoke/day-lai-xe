@@ -49,6 +49,16 @@ const LandingPageClient = ({ data }: LandingPageClientProps) => {
     minutes: 0,
     seconds: 0,
   });
+  const [formData, setFormData] = useState({
+    name: "",
+    phone: "",
+    license: "",
+    note: "",
+  });
+  const [formStatus, setFormStatus] = useState<
+    "idle" | "loading" | "success" | "error"
+  >("idle");
+  const [formError, setFormError] = useState("");
 
   // Auto slide banner
   useEffect(() => {
@@ -87,9 +97,52 @@ const LandingPageClient = ({ data }: LandingPageClientProps) => {
     }
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    alert("Cảm ơn bạn đã đăng ký! Chúng tôi sẽ liên hệ sớm.");
+
+    if (!formData.name || !formData.phone || !formData.license) {
+      setFormError("Vui lòng điền đầy đủ thông tin bắt buộc");
+      return;
+    }
+
+    setFormStatus("loading");
+    setFormError("");
+
+    try {
+      const response = await fetch("/api/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          mobile: formData.phone,
+          type: formData.license,
+          note: formData.note,
+        }),
+      });
+
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.error || "Đã xảy ra lỗi");
+      }
+
+      setFormStatus("success");
+      // Reset form after 5 seconds
+      setTimeout(() => {
+        setFormStatus("idle");
+        setFormData({ name: "", phone: "", license: "", note: "" });
+      }, 5000);
+    } catch (error) {
+      setFormStatus("error");
+      setFormError(
+        error instanceof Error
+          ? error.message
+          : "Đã xảy ra lỗi. Vui lòng thử lại.",
+      );
+      setTimeout(() => setFormStatus("idle"), 5000);
+    }
   };
 
   const nextBanner = () => {
@@ -505,54 +558,128 @@ const LandingPageClient = ({ data }: LandingPageClientProps) => {
             </div>
 
             <div id="contact" className="bg-white rounded-2xl p-8 shadow-2xl">
-              <h3 className="text-2xl font-bold text-gray-900 mb-2">
-                Đăng ký học với Thầy Tùng
-              </h3>
-              <p className="text-red-500 font-medium mb-6">
-                🔥 Ưu đãi đặc biệt cho 20 học viên đầu tiên trong tháng!
-              </p>
+              {formStatus === "success" ? (
+                <div className="text-center py-8">
+                  <div className="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <CheckCircle className="w-8 h-8 text-white" />
+                  </div>
+                  <h3 className="text-xl font-bold text-green-800 mb-2">
+                    Đăng ký thành công! 🎉
+                  </h3>
+                  <p className="text-green-700 mb-4">
+                    Cảm ơn bạn đã đăng ký. Thầy Tùng sẽ liên hệ trong vòng 30
+                    phút!
+                  </p>
+                  <a
+                    href={`tel:${contact.phoneRaw}`}
+                    className="inline-flex items-center gap-2 text-green-600 font-medium hover:text-green-700"
+                  >
+                    <Phone size={18} />
+                    Hoặc gọi ngay: {contact.phoneDisplay}
+                  </a>
+                </div>
+              ) : (
+                <>
+                  <h3 className="text-2xl font-bold text-gray-900 mb-2">
+                    Đăng ký học với Thầy Tùng
+                  </h3>
+                  <p className="text-red-500 font-medium mb-6">
+                    🔥 Ưu đãi đặc biệt cho 20 học viên đầu tiên trong tháng!
+                  </p>
 
-              <form onSubmit={handleSubmit} className="space-y-4">
-                <div>
-                  <input
-                    type="text"
-                    placeholder="Họ và tên *"
-                    required
-                    className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-yellow-500 focus:border-transparent outline-none transition-all"
-                  />
-                </div>
-                <div>
-                  <input
-                    type="tel"
-                    placeholder="Số điện thoại *"
-                    required
-                    className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-yellow-500 focus:border-transparent outline-none transition-all"
-                  />
-                </div>
-                <div>
-                  <select className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-yellow-500 focus:border-transparent outline-none transition-all bg-white">
-                    <option value="">Chọn hạng bằng *</option>
-                    {data.licenseOptions.map((opt) => (
-                      <option key={opt} value={opt}>
-                        {opt}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-                <div>
-                  <textarea
-                    placeholder="Ghi chú (không bắt buộc)"
-                    rows={3}
-                    className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-yellow-500 focus:border-transparent outline-none transition-all resize-none"
-                  />
-                </div>
-                <button
-                  type="submit"
-                  className="w-full bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-bold py-4 rounded-lg transition-all"
-                >
-                  ĐĂNG KÝ NGAY
-                </button>
-              </form>
+                  {formError && (
+                    <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg mb-4">
+                      {formError}
+                    </div>
+                  )}
+
+                  <form onSubmit={handleSubmit} className="space-y-4">
+                    <div>
+                      <input
+                        type="text"
+                        placeholder="Họ và tên *"
+                        required
+                        value={formData.name}
+                        onChange={(e) =>
+                          setFormData({ ...formData, name: e.target.value })
+                        }
+                        className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-yellow-500 focus:border-transparent outline-none transition-all"
+                      />
+                    </div>
+                    <div>
+                      <input
+                        type="tel"
+                        placeholder="Số điện thoại *"
+                        required
+                        value={formData.phone}
+                        onChange={(e) =>
+                          setFormData({ ...formData, phone: e.target.value })
+                        }
+                        className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-yellow-500 focus:border-transparent outline-none transition-all"
+                      />
+                    </div>
+                    <div>
+                      <select
+                        value={formData.license}
+                        onChange={(e) =>
+                          setFormData({ ...formData, license: e.target.value })
+                        }
+                        className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-yellow-500 focus:border-transparent outline-none transition-all bg-white"
+                      >
+                        <option value="">Chọn hạng bằng *</option>
+                        {data.licenseOptions.map((opt) => (
+                          <option key={opt} value={opt}>
+                            {opt}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                    <div>
+                      <textarea
+                        placeholder="Ghi chú (không bắt buộc)"
+                        rows={3}
+                        value={formData.note}
+                        onChange={(e) =>
+                          setFormData({ ...formData, note: e.target.value })
+                        }
+                        className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-yellow-500 focus:border-transparent outline-none transition-all resize-none"
+                      />
+                    </div>
+                    <button
+                      type="submit"
+                      disabled={formStatus === "loading"}
+                      className="w-full bg-yellow-500 hover:bg-yellow-600 disabled:bg-yellow-300 disabled:cursor-not-allowed text-gray-900 font-bold py-4 rounded-lg transition-all flex items-center justify-center gap-2"
+                    >
+                      {formStatus === "loading" ? (
+                        <>
+                          <svg
+                            className="animate-spin h-5 w-5"
+                            viewBox="0 0 24 24"
+                          >
+                            <circle
+                              className="opacity-25"
+                              cx="12"
+                              cy="12"
+                              r="10"
+                              stroke="currentColor"
+                              strokeWidth="4"
+                              fill="none"
+                            />
+                            <path
+                              className="opacity-75"
+                              fill="currentColor"
+                              d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                            />
+                          </svg>
+                          Đang gửi...
+                        </>
+                      ) : (
+                        "ĐĂNG KÝ NGAY"
+                      )}
+                    </button>
+                  </form>
+                </>
+              )}
             </div>
           </div>
         </div>
