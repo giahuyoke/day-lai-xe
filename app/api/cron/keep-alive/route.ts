@@ -22,9 +22,10 @@ async function checkUpstashStatus(): Promise<ServerStatus> {
   try {
     const now = new Date().toISOString();
     await redis.set("lastUpdatedAt", now);
-    await redis.get("health-check");
     const lastUpdatedAt = await redis.get("lastUpdatedAt");
-    const siteData = await redis.get("siteData");
+
+    // siteData is stored as JSON, use redis.json.get
+    const siteData = await redis.json.get("siteData");
 
     const latency = Date.now() - start;
 
