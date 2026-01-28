@@ -21,6 +21,8 @@ export default async function PublicLayout({ children }: PublicLayoutProps) {
         phoneRaw={contact.phoneRaw}
         hotlineDisplay={contact.hotlineDisplay}
         hotlineRaw={contact.hotlineRaw}
+        email={contact.email}
+        address={contact.address}
       />
       <main className="flex-grow">{children}</main>
       <Footer contact={contact} />

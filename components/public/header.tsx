@@ -9,6 +9,8 @@ interface HeaderProps {
   phoneRaw?: string;
   hotlineDisplay?: string;
   hotlineRaw?: string;
+  email?: string;
+  address?: string
 }
 
 const Header = ({
@@ -16,6 +18,8 @@ const Header = ({
   phoneRaw = "0964940495",
   hotlineDisplay = "1900.123.456",
   hotlineRaw = "1900123456",
+  email = "letungdaotaolaixe@gmail.com",
+  address = "Trương Thị Hoa, Quận 12, TP.HCM"
 }: HeaderProps) => {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
   const [scrolled, setScrolled] = useState<boolean>(false);
@@ -52,11 +56,11 @@ const Header = ({
           <div className="flex items-center gap-6">
             <span className="flex items-center gap-2">
               <MapPin size={14} className="text-yellow-500" />
-              Trương Thị Hoa, Quận 12, TP.HCM
+              {address}
             </span>
             <span className="flex items-center gap-2">
               <Mail size={14} className="text-yellow-500" />
-              thaytunglaixin@gmail.com
+              {email}
             </span>
           </div>
           <div className="flex items-center gap-4">
