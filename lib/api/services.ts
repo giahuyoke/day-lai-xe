@@ -26,6 +26,7 @@ export interface ContactInfo {
   email: string;
   workingHours: string;
   facebookUrl: string;
+  tiktokUrl: string;
   ctaTitle?: string;
   ctaDescription?: string;
 }
@@ -157,6 +158,7 @@ const defaultSiteData: SiteData = {
     email: "thaytunglaixin@gmail.com",
     workingHours: "6:00 - 21:00 (Cả T7, CN & Lễ)",
     facebookUrl: "https://facebook.com/laixethaytung",
+    tiktokUrl: "https://tiktok.com/@laixethaytung",
     ctaTitle: "Gọi Ngay Thầy Tùng",
     ctaDescription: "Tư vấn miễn phí 24/7",
   },

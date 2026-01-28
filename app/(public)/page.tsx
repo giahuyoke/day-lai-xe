@@ -45,7 +45,7 @@ export const metadata: Metadata = {
     follow: true,
   },
   alternates: {
-    canonical: "https://laixethaytung.vn",
+    canonical: "https://letungdaotaolaixe.com",
   },
 };
 

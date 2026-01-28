@@ -262,6 +262,11 @@ export default function AdminDashboardPage() {
                   value={siteData.contact.facebookUrl}
                   onChange={(v) => updateField("contact.facebookUrl", v)}
                 />
+                <InputField
+                  label="TikTok URL"
+                  value={siteData.contact.tiktokUrl}
+                  onChange={(v) => updateField("contact.tiktokUrl", v)}
+                />
               </div>
             </div>
           )}

@@ -43,6 +43,7 @@ interface LandingPageClientProps {
 
 const LandingPageClient = ({ data }: LandingPageClientProps) => {
   const [currentBanner, setCurrentBanner] = useState(0);
+  const [currentTestimonial, setCurrentTestimonial] = useState(0);
   const [countdown, setCountdown] = useState({
     days: 0,
     hours: 0,
@@ -67,6 +68,14 @@ const LandingPageClient = ({ data }: LandingPageClientProps) => {
     }, 5000);
     return () => clearInterval(timer);
   }, [data.hero.bannerImages.length]);
+
+  // Auto slide testimonials
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentTestimonial((prev) => (prev + 1) % data.testimonials.length);
+    }, 4000);
+    return () => clearInterval(timer);
+  }, [data.testimonials.length]);
 
   // Countdown timer
   useEffect(() => {
@@ -186,13 +195,19 @@ const LandingPageClient = ({ data }: LandingPageClientProps) => {
   return (
     <>
       {/* === HERO SECTION === */}
-      <section id="hero" className="relative h-[600px] md:h-[700px]">
+      <section
+        id="hero"
+        className="relative h-[600px] md:h-[750px] overflow-hidden"
+      >
+        {/* Background Images with Slide Effect */}
         <div className="absolute inset-0 z-0">
           {data.hero.bannerImages.map((img, idx) => (
             <div
               key={idx}
-              className={`absolute inset-0 transition-opacity duration-1000 ${
-                idx === currentBanner ? "opacity-100" : "opacity-0"
+              className={`absolute inset-0 transition-all duration-700 ease-in-out ${
+                idx === currentBanner
+                  ? "opacity-100 scale-100"
+                  : "opacity-0 scale-105"
               }`}
             >
               <Image
@@ -202,55 +217,74 @@ const LandingPageClient = ({ data }: LandingPageClientProps) => {
                 className="object-cover"
                 priority={idx === 0}
               />
-              <div className="absolute inset-0 bg-black/50"></div>
+              {/* Gradient overlay for better text readability */}
+              <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent"></div>
             </div>
           ))}
         </div>
 
+        {/* Navigation Arrows */}
         <button
           onClick={prevBanner}
-          className="absolute left-4 top-1/2 -translate-y-1/2 z-20 bg-white/20 hover:bg-white/40 p-3 rounded-full text-white transition-all"
+          className="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 z-20 w-12 h-12 md:w-14 md:h-14 bg-white/10 hover:bg-white/30 backdrop-blur-sm border border-white/30 rounded-full text-white transition-all duration-300 flex items-center justify-center group"
           aria-label="Previous"
         >
-          <ChevronLeft size={28} />
+          <ChevronLeft
+            size={28}
+            className="group-hover:-translate-x-0.5 transition-transform"
+          />
         </button>
         <button
           onClick={nextBanner}
-          className="absolute right-4 top-1/2 -translate-y-1/2 z-20 bg-white/20 hover:bg-white/40 p-3 rounded-full text-white transition-all"
+          className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 z-20 w-12 h-12 md:w-14 md:h-14 bg-white/10 hover:bg-white/30 backdrop-blur-sm border border-white/30 rounded-full text-white transition-all duration-300 flex items-center justify-center group"
           aria-label="Next"
         >
-          <ChevronRight size={28} />
+          <ChevronRight
+            size={28}
+            className="group-hover:translate-x-0.5 transition-transform"
+          />
         </button>
 
+        {/* Hero Content */}
         <div className="relative z-10 h-full flex items-center">
-          <div className="container mx-auto px-4">
-            <div className="max-w-3xl">
-              <p className="text-yellow-400 text-lg md:text-xl font-medium mb-4">
-                {data.hero.tagline}
-              </p>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6">
-                {data.hero.titleMain}{" "}
-                <span className="text-yellow-400">
+          <div className="container mx-auto px-4 md:px-8 lg:px-16">
+            <div className="max-w-2xl lg:max-w-3xl">
+              {/* Tagline with icon */}
+              <div className="flex items-center gap-2 mb-4">
+                <span className="text-2xl">🏆</span>
+                <p className="text-yellow-400 text-base md:text-lg font-semibold tracking-wide">
+                  {data.hero.tagline}
+                </p>
+              </div>
+
+              {/* Main Title */}
+              <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold leading-tight mb-6">
+                <span className="text-white">{data.hero.titleMain}</span>{" "}
+                <span className="text-yellow-400 drop-shadow-lg">
                   {data.hero.titleHighlight1}
                 </span>
                 <br />
-                <span className="text-yellow-400">
+                <span className="text-yellow-400 drop-shadow-lg">
                   {data.hero.titleHighlight2}
                 </span>
               </h1>
-              <p className="text-lg md:text-xl text-gray-200 mb-8 max-w-2xl">
+
+              {/* Description */}
+              <p className="text-base md:text-lg lg:text-xl text-gray-200 mb-8 max-w-xl leading-relaxed">
                 {data.hero.description}
               </p>
+
+              {/* CTA Buttons */}
               <div className="flex flex-col sm:flex-row gap-4">
                 <button
                   onClick={() => handleScrollTo("courses")}
-                  className="bg-yellow-500 hover:bg-yellow-600 text-gray-900 px-8 py-4 rounded-lg font-bold text-lg transition-all inline-flex items-center justify-center gap-2"
+                  className="bg-yellow-500 hover:bg-yellow-400 text-gray-900 px-8 py-4 rounded-lg font-bold text-lg transition-all duration-300 inline-flex items-center justify-center gap-2 shadow-lg hover:shadow-yellow-500/30 hover:-translate-y-0.5"
                 >
                   Tìm hiểu thêm <ArrowRight size={20} />
                 </button>
                 <a
                   href={`tel:${contact.phoneRaw}`}
-                  className="bg-transparent border-2 border-white text-white hover:bg-white hover:text-gray-900 px-8 py-4 rounded-lg font-bold text-lg transition-all inline-flex items-center justify-center gap-2"
+                  className="bg-transparent border-2 border-white/80 text-white hover:bg-white hover:text-gray-900 px-8 py-4 rounded-lg font-bold text-lg transition-all duration-300 inline-flex items-center justify-center gap-2 backdrop-blur-sm"
                 >
                   <Phone size={20} /> {contact.phoneDisplay}
                 </a>
@@ -259,19 +293,29 @@ const LandingPageClient = ({ data }: LandingPageClientProps) => {
           </div>
         </div>
 
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex gap-3">
+        {/* Slide Indicators - Bottom Right */}
+        <div className="absolute bottom-8 md:bottom-12 right-8 md:right-16 z-20 flex items-center gap-2">
           {data.hero.bannerImages.map((_, idx) => (
             <button
               key={idx}
               onClick={() => setCurrentBanner(idx)}
-              className={`w-3 h-3 rounded-full transition-all ${
+              className={`h-2.5 rounded-full transition-all duration-300 ${
                 idx === currentBanner
-                  ? "bg-yellow-500 w-8"
-                  : "bg-white/50 hover:bg-white/80"
+                  ? "bg-yellow-500 w-10"
+                  : "bg-white/40 hover:bg-white/70 w-2.5"
               }`}
               aria-label={`Go to slide ${idx + 1}`}
             />
           ))}
+        </div>
+
+        {/* Slide Counter */}
+        <div className="absolute bottom-8 md:bottom-12 left-8 md:left-16 z-20 text-white/60 text-sm font-medium">
+          <span className="text-white text-lg font-bold">
+            {String(currentBanner + 1).padStart(2, "0")}
+          </span>
+          <span className="mx-2">/</span>
+          <span>{String(data.hero.bannerImages.length).padStart(2, "0")}</span>
         </div>
       </section>
 
@@ -699,57 +743,139 @@ const LandingPageClient = ({ data }: LandingPageClientProps) => {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-            {data.testimonials.slice(0, 3).map((review) => (
+          {/* Testimonials Slider */}
+          <div className="relative max-w-6xl mx-auto">
+            {/* Navigation Buttons */}
+            <button
+              onClick={() =>
+                setCurrentTestimonial(
+                  (prev) =>
+                    (prev - 1 + data.testimonials.length) %
+                    data.testimonials.length,
+                )
+              }
+              className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 z-10 bg-white shadow-lg hover:bg-gray-50 p-3 rounded-full text-gray-600 transition-all hidden md:block"
+              aria-label="Previous testimonial"
+            >
+              <ChevronLeft size={24} />
+            </button>
+            <button
+              onClick={() =>
+                setCurrentTestimonial(
+                  (prev) => (prev + 1) % data.testimonials.length,
+                )
+              }
+              className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 z-10 bg-white shadow-lg hover:bg-gray-50 p-3 rounded-full text-gray-600 transition-all hidden md:block"
+              aria-label="Next testimonial"
+            >
+              <ChevronRight size={24} />
+            </button>
+
+            {/* Slider Container */}
+            <div className="overflow-hidden pt-6">
               <div
-                key={review.id}
-                className="bg-gray-50 rounded-2xl p-6 relative hover:shadow-xl transition-shadow"
+                className="flex transition-transform duration-500 ease-in-out"
+                style={{
+                  transform: `translateX(-${currentTestimonial * 100}%)`,
+                }}
               >
-                {/* Quote icon */}
-                <div className="absolute -top-4 left-6">
-                  <div className="w-10 h-10 bg-yellow-500 rounded-full flex items-center justify-center">
-                    <Quote size={20} className="text-white" />
-                  </div>
-                </div>
+                {data.testimonials.map((review) => (
+                  <div key={review.id} className="w-full flex-shrink-0 px-4">
+                    <div className="grid md:grid-cols-3 gap-6 pt-2">
+                      {/* Show 3 cards at a time on desktop */}
+                      {data.testimonials
+                        .slice(
+                          data.testimonials.indexOf(review),
+                          data.testimonials.indexOf(review) + 3,
+                        )
+                        .concat(
+                          data.testimonials.slice(
+                            0,
+                            Math.max(
+                              0,
+                              3 -
+                                (data.testimonials.length -
+                                  data.testimonials.indexOf(review)),
+                            ),
+                          ),
+                        )
+                        .slice(0, 3)
+                        .map((item, idx) => (
+                          <div
+                            key={`${review.id}-${idx}`}
+                            className="bg-gray-50 rounded-2xl p-6 relative hover:shadow-xl transition-shadow"
+                          >
+                            {/* Quote icon */}
+                            <div className="absolute -top-4 left-6">
+                              <div className="w-10 h-10 bg-yellow-500 rounded-full flex items-center justify-center">
+                                <Quote size={20} className="text-white" />
+                              </div>
+                            </div>
 
-                {/* Rating */}
-                <div className="flex gap-1 mb-4 mt-4">
-                  {[...Array(5)].map((_, i) => (
-                    <Star
-                      key={i}
-                      size={18}
-                      className={`${
-                        i < review.rating
-                          ? "text-yellow-500 fill-yellow-500"
-                          : "text-gray-300"
-                      }`}
-                    />
-                  ))}
-                </div>
+                            {/* Rating */}
+                            <div className="flex gap-1 mb-4 mt-4">
+                              {[...Array(5)].map((_, i) => (
+                                <Star
+                                  key={i}
+                                  size={18}
+                                  className={`${
+                                    i < item.rating
+                                      ? "text-yellow-500 fill-yellow-500"
+                                      : "text-gray-300"
+                                  }`}
+                                />
+                              ))}
+                            </div>
 
-                {/* Content */}
-                <p className="text-gray-700 mb-6 leading-relaxed italic">
-                  &ldquo;{review.content}&rdquo;
-                </p>
+                            {/* Content */}
+                            <p className="text-gray-700 mb-6 leading-relaxed italic line-clamp-4">
+                              &ldquo;{item.content}&rdquo;
+                            </p>
 
-                {/* Author */}
-                <div className="flex items-center gap-3 border-t border-gray-200 pt-4">
-                  <div className="w-12 h-12 bg-yellow-500 rounded-full flex items-center justify-center text-white font-bold text-lg">
-                    {review.name.charAt(0)}
+                            {/* Author */}
+                            <div className="flex items-center gap-3 border-t border-gray-200 pt-4">
+                              <div className="w-12 h-12 bg-yellow-500 rounded-full flex items-center justify-center text-white font-bold text-lg">
+                                {item.name.charAt(0)}
+                              </div>
+                              <div>
+                                <p className="font-bold text-gray-900">
+                                  {item.name}
+                                </p>
+                                <p className="text-sm text-gray-500">
+                                  Học viên hạng {item.licenseType} •{" "}
+                                  {new Date(item.date).toLocaleDateString(
+                                    "vi-VN",
+                                    {
+                                      month: "long",
+                                      year: "numeric",
+                                    },
+                                  )}
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        ))}
+                    </div>
                   </div>
-                  <div>
-                    <p className="font-bold text-gray-900">{review.name}</p>
-                    <p className="text-sm text-gray-500">
-                      Học viên hạng {review.licenseType} •{" "}
-                      {new Date(review.date).toLocaleDateString("vi-VN", {
-                        month: "long",
-                        year: "numeric",
-                      })}
-                    </p>
-                  </div>
-                </div>
+                ))}
               </div>
-            ))}
+            </div>
+
+            {/* Dots Indicator */}
+            <div className="flex justify-center gap-2 mt-8">
+              {data.testimonials.map((_, idx) => (
+                <button
+                  key={idx}
+                  onClick={() => setCurrentTestimonial(idx)}
+                  className={`w-3 h-3 rounded-full transition-all ${
+                    idx === currentTestimonial
+                      ? "bg-yellow-500 w-8"
+                      : "bg-gray-300 hover:bg-gray-400"
+                  }`}
+                  aria-label={`Go to testimonial ${idx + 1}`}
+                />
+              ))}
+            </div>
           </div>
 
           {/* Stats highlight */}
@@ -1018,6 +1144,21 @@ const LandingPageClient = ({ data }: LandingPageClientProps) => {
                     viewBox="0 0 24 24"
                   >
                     <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+                  </svg>
+                </a>
+                <a
+                  href={contact.tiktokUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="w-10 h-10 bg-black text-white rounded-full flex items-center justify-center hover:bg-gray-800 transition-colors"
+                  aria-label="TikTok"
+                >
+                  <svg
+                    className="w-5 h-5"
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z" />
                   </svg>
                 </a>
                 <a
