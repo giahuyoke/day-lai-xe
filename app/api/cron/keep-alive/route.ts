@@ -113,7 +113,7 @@ function generateEmailHtml(
     <html>
     <head>
       <meta charset="utf-8">
-      <title>Báo cáo Server hàng ngày</title>
+      <title>Báo cáo Server hàng tuần</title>
     </head>
     <body style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
       <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 30px; border-radius: 10px 10px 0 0;">
