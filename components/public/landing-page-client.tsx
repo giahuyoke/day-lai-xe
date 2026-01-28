@@ -20,6 +20,9 @@ import {
   Star,
   Quote,
   Eye,
+  Gift,
+  Users,
+  Sparkles,
 } from "lucide-react";
 import type { SiteData } from "@/lib/api/services";
 import { formatCurrencyVND } from "@/lib/api/services";
@@ -168,6 +171,7 @@ const LandingPageClient = ({ data }: LandingPageClientProps) => {
 
   const { pricing, contact, promotions } = data;
   const activePromo = promotions.find((p) => p.isActive);
+  const activePromotions = promotions.filter((p) => p.isActive);
 
   const whyChooseUs = [
     {
@@ -398,6 +402,110 @@ const LandingPageClient = ({ data }: LandingPageClientProps) => {
           </div>
         </div>
       </section>
+
+      {/* === PROMOTIONS SECTION === */}
+      {activePromotions.length > 0 && (
+        <section className="py-16 bg-gradient-to-br from-amber-50 via-orange-50 to-yellow-50 relative overflow-hidden">
+          {/* Soft background decorations */}
+          <div className="absolute inset-0">
+            <div className="absolute top-10 left-10 w-72 h-72 bg-yellow-200/30 rounded-full blur-3xl" />
+            <div className="absolute bottom-10 right-10 w-96 h-96 bg-orange-200/30 rounded-full blur-3xl" />
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-amber-100/40 rounded-full blur-3xl" />
+          </div>
+
+          <div className="container mx-auto px-4 relative z-10">
+            <div className="text-center mb-10">
+              <div className="inline-flex items-center gap-2 bg-yellow-500/10 border border-yellow-500/20 px-5 py-2.5 rounded-full mb-4">
+                <Sparkles className="w-5 h-5 text-yellow-600" />
+                <span className="text-yellow-700 font-semibold text-sm">
+                  ƯU ĐÃI ĐẶC BIỆT
+                </span>
+              </div>
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-3">
+                Khuyến Mãi Đang Diễn Ra
+              </h2>
+              <p className="text-gray-600 text-lg">
+                Đăng ký ngay để nhận ưu đãi hấp dẫn!
+              </p>
+            </div>
+
+            <div
+              className={`grid gap-6 ${activePromotions.length === 1 ? "max-w-md mx-auto" : activePromotions.length === 2 ? "md:grid-cols-2 max-w-3xl mx-auto" : "md:grid-cols-2 lg:grid-cols-3"}`}
+            >
+              {activePromotions.map((promo, idx) => (
+                <div
+                  key={promo.id}
+                  className="bg-white/80 backdrop-blur-sm rounded-3xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 relative overflow-hidden border border-white/50 group flex flex-col"
+                >
+                  {/* Subtle accent */}
+                  {idx === 0 && (
+                    <div className="absolute top-4 right-4 bg-orange-500 text-white text-xs font-semibold px-3 py-1 rounded-full">
+                      HOT
+                    </div>
+                  )}
+
+                  {/* Icon */}
+                  <div className="w-14 h-14 bg-gradient-to-br from-yellow-400 to-orange-400 rounded-2xl flex items-center justify-center mb-4 shadow-md group-hover:scale-105 transition-transform">
+                    {promo.title.toLowerCase().includes("nhóm") ? (
+                      <Users className="w-7 h-7 text-white" />
+                    ) : (
+                      <Gift className="w-7 h-7 text-white" />
+                    )}
+                  </div>
+
+                  {/* Content */}
+                  <h3 className="text-xl font-bold text-gray-800 mb-2">
+                    {promo.title}
+                  </h3>
+                  <p className="text-gray-500 mb-4 text-sm">
+                    {promo.description}
+                  </p>
+
+                  {/* Discount badge */}
+                  {promo.discountVND > 0 && (
+                    <div className="bg-gradient-to-r from-orange-500 to-amber-500 text-white px-4 py-2 rounded-xl inline-block mb-4">
+                      <span className="text-xl font-bold">
+                        Giảm {formatCurrencyVND(promo.discountVND)}
+                      </span>
+                    </div>
+                  )}
+
+                  {/* Code if exists */}
+                  {promo.code && (
+                    <div className="bg-gray-50 rounded-xl p-3 mb-4 border border-gray-100">
+                      <p className="text-xs text-gray-400 mb-1">Mã ưu đãi:</p>
+                      <p className="text-lg font-bold text-gray-800 tracking-wider">
+                        {promo.code}
+                      </p>
+                    </div>
+                  )}
+
+                  {/* Spacer to push button to bottom */}
+                  <div className="flex-grow"></div>
+
+                  {/* Expiry */}
+                  <div className="flex items-center gap-2 text-sm text-gray-400">
+                    <Clock size={14} />
+                    <span>
+                      Hết hạn:{" "}
+                      {new Date(promo.validUntil).toLocaleDateString("vi-VN")}
+                    </span>
+                  </div>
+
+                  {/* CTA Button */}
+                  <button
+                    onClick={() => handleScrollTo("contact")}
+                    className="w-full mt-4 py-3 bg-gray-900 text-white font-semibold rounded-xl hover:bg-gray-800 transition-all flex items-center justify-center gap-2"
+                  >
+                    Đăng ký ngay
+                    <ArrowRight size={16} />
+                  </button>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* === WHY CHOOSE US === */}
       <section className="py-20 bg-gray-50">
