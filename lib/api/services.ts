@@ -235,7 +235,7 @@ const defaultSiteData: SiteData = {
         badge: "Phổ biến",
         buttonText: "Đăng Ký B1",
         features: [
-          "Xe Honda City đời mới 2023",
+          "Xe Honda Civic",
           "Chạy DAT 710km (bắt buộc)",
           "Học sa hình thô & cảm ứng",
           "Bao trọn gói lệ phí thi",

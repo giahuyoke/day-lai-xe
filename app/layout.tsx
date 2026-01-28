@@ -1,12 +1,14 @@
 import "./globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const inter = Inter({ subsets: ["latin", "vietnamese"] });
 
 export const metadata: Metadata = {
   title: {
-    default: "Lái Xe Thầy Tùng - Trung tâm đào tạo lái xe Trường An | Dạy Lái Xe Uy Tín Bao Đậu 100% - TP.HCM",
+    default:
+      "Lái Xe Thầy Tùng - Trung tâm đào tạo lái xe Trường An | Dạy Lái Xe Uy Tín Bao Đậu 100% - TP.HCM",
     template: "%s | Lái Xe Thầy Tùng",
   },
   description:
@@ -34,7 +36,7 @@ export const metadata: Metadata = {
     "Trung tâm đào tạo lái xe Trường An",
     "Trường An B1",
     "Trường An lái xe B1",
-    "Trường An lái xe B2"
+    "Trường An lái xe B2",
   ],
   authors: [{ name: "Thầy Tùng - Dạy Lái Xe" }],
   creator: "Lái Xe Thầy Tùng",
@@ -79,8 +81,8 @@ const structuredData = {
   email: "https://www.facebook.com/daotaolaixe.letung",
   address: {
     "@type": "PostalAddress",
-    streetAddress: "Quận Bình Tân",
-    addressLocality: "Bình Tân",
+    streetAddress: "Quận 12",
+    addressLocality: "Quận 12",
     addressRegion: "TP. Hồ Chí Minh",
     addressCountry: "VN",
   },
@@ -120,7 +122,10 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
         />
       </head>
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        {children}
+        <SpeedInsights />
+      </body>
     </html>
   );
 }

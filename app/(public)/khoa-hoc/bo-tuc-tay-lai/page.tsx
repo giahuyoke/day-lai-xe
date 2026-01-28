@@ -115,7 +115,7 @@ export default async function BoTucTayLaiPage() {
     },
     {
       q: "Học bổ túc trên xe gì?",
-      a: "Bạn có thể học trên xe của chúng tôi (Honda City, Xpander) hoặc xe của bạn nếu muốn làm quen với xe mới mua.",
+      a: "Bạn có thể học trên xe của chúng tôi (Honda Civic, Xpander) hoặc xe của bạn nếu muốn làm quen với xe mới mua.",
     },
     {
       q: "Tôi có thể chọn nội dung học không?",
