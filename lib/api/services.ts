@@ -388,7 +388,7 @@ const defaultSiteData: SiteData = {
       "/anh-xe-tai.jpg",
       "/anh-3-xe.jpg",
     ],
-    office: ["/anh-van-phong.jpg"],
+    office: ["/anh-chan-dung.jpg"],
     training: ["/banner-1.jpg", "/banner-2.jpg", "/banner-3.jpg"],
   },
 };

@@ -326,7 +326,7 @@ const LandingPageClient = ({ data }: LandingPageClientProps) => {
             <div className="relative">
               <div className="relative h-[400px] md:h-[500px] rounded-2xl overflow-hidden shadow-2xl">
                 <Image
-                  src="/anh-van-phong.jpg"
+                  src="/anh-chan-dung.jpg"
                   alt="Thầy Tùng dạy lái xe"
                   fill
                   className="object-cover"
