@@ -6,11 +6,11 @@ const inter = Inter({ subsets: ["latin", "vietnamese"] });
 
 export const metadata: Metadata = {
   title: {
-    default: "Lái Xe Thầy Tùng | Dạy Lái Xe Uy Tín Bao Đậu 100% - TP.HCM",
+    default: "Lái Xe Thầy Tùng - Trung tâm đào tạo lái xe Trường An | Dạy Lái Xe Uy Tín Bao Đậu 100% - TP.HCM",
     template: "%s | Lái Xe Thầy Tùng",
   },
   description:
-    "🏆 Thầy Tùng - Giáo viên dạy lái xe 5+ năm kinh nghiệm. Học 1 kèm 1, cam kết BAO ĐẬU 100%, xe đời mới. Không phát sinh chi phí. Gọi ngay!",
+    "🏆 Thầy Tùng - Giáo viên dạy lái xe 5+ năm kinh nghiệm tại Trung tâm đào tạo lái xe Trường An. Học 1 kèm 1, cam kết BAO ĐẬU 100%, xe đời mới. Không phát sinh chi phí. Gọi ngay!",
   icons: {
     icon: "/logo-vector.png",
     shortcut: "/logo-vector.png",
@@ -23,9 +23,18 @@ export const metadata: Metadata = {
     "học lái xe b1",
     "dạy lái xe bao đậu",
     "học lái xe tphcm",
-    "học lái xe bình tân",
     "học lái xe 1 kèm 1",
     "học lái xe cam kết đậu",
+    "học lái xe quận 12",
+    "học lái xe thầy tùng",
+    "lê tùng dạy lái xe",
+    "đào tạo lái xe lê tùng",
+    "lê tùng đào tạo lái xe",
+    "Trung tâm trường an",
+    "Trung tâm đào tạo lái xe Trường An",
+    "Trường An B1",
+    "Trường An lái xe B1",
+    "Trường An lái xe B2"
   ],
   authors: [{ name: "Thầy Tùng - Dạy Lái Xe" }],
   creator: "Lái Xe Thầy Tùng",
@@ -35,7 +44,7 @@ export const metadata: Metadata = {
     address: false,
     telephone: false,
   },
-  metadataBase: new URL("https://laixethaytung.vn"),
+  metadataBase: new URL("https://letungdaotaolaixe.com"),
   openGraph: {
     type: "website",
     locale: "vi_VN",
@@ -65,9 +74,9 @@ const structuredData = {
   alternateName: "Thầy Tùng Dạy Lái Xe",
   description:
     "Thầy Tùng - Giáo viên dạy lái xe uy tín với 5+ năm kinh nghiệm tại TP.HCM. Học 1 kèm 1, cam kết bao đậu 100%, xe đời mới.",
-  url: "https://laixethaytung.vn",
+  url: "https://letungdaotaolaixe.com",
   telephone: "0964940495",
-  email: "thaytunglaixin@gmail.com",
+  email: "https://www.facebook.com/daotaolaixe.letung",
   address: {
     "@type": "PostalAddress",
     streetAddress: "Quận Bình Tân",
@@ -88,8 +97,8 @@ const structuredData = {
     reviewCount: "1500",
     bestRating: "5",
   },
-  image: "https://laixethaytung.vn/banner-1.jpg",
-  sameAs: ["https://facebook.com/laixethaytung"],
+  image: "https://letungdaotaolaixe.com/banner-1.jpg",
+  sameAs: ["https://www.facebook.com/daotaolaixe.letung"],
   founder: {
     "@type": "Person",
     name: "Thầy Tùng",

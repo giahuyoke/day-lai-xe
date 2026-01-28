@@ -694,7 +694,7 @@ const LandingPageClient = ({ data }: LandingPageClientProps) => {
               Địa Chỉ <span className="text-yellow-500">Liên Hệ</span>
             </h2>
             <p className="text-gray-600 max-w-2xl mx-auto">
-              Ghé thăm văn phòng hoặc sân tập để được tư vấn trực tiếp
+              Ghé thăm văn phòng để được tư vấn trực tiếp
             </p>
           </div>
 
@@ -728,30 +728,6 @@ const LandingPageClient = ({ data }: LandingPageClientProps) => {
                     <p className="text-gray-600 text-sm">{contact.address}</p>
                     <a
                       href="https://maps.app.goo.gl/3wZux7dD1SS8oogRA"
-                      target="_blank"
-                      rel="noreferrer"
-                      className="inline-flex items-center gap-1 text-yellow-600 hover:text-yellow-700 text-sm font-medium mt-2"
-                    >
-                      Xem trên Google Maps <ArrowRight size={14} />
-                    </a>
-                  </div>
-                </div>
-              </div>
-
-              <div className="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow">
-                <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0">
-                    <GraduationCap className="w-6 h-6 text-green-600" />
-                  </div>
-                  <div>
-                    <h4 className="font-bold text-gray-900 mb-1">
-                      Sân Tập Lái
-                    </h4>
-                    <p className="text-gray-600 text-sm">
-                      {contact.trainingAddress}
-                    </p>
-                    <a
-                      href="https://maps.app.goo.gl/TqnfG9RSBuUy6gfg8"
                       target="_blank"
                       rel="noreferrer"
                       className="inline-flex items-center gap-1 text-yellow-600 hover:text-yellow-700 text-sm font-medium mt-2"
