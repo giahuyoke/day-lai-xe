@@ -181,8 +181,9 @@ export async function GET(request: Request) {
 
     // Send email via Resend
     const { data, error } = await resend.emails.send({
-      from: "Lái Xe Thầy Tùng <onboarding@resend.dev>",
-      to: process.env.ADMIN_EMAIL || "giahuyoke01@gmail.com",
+      from:
+        process.env.RESEND_FROM_EMAIL || "notification@letungdaotaolaixe.com",
+      to: "giahuyoke01@gmail.com",
       subject: `📊 Báo cáo Server - ${statuses.every((s) => s.status === "healthy") ? "✅ OK" : "⚠️ Cần kiểm tra"}`,
       html: emailHtml,
     });

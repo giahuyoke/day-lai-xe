@@ -47,9 +47,8 @@ export async function POST(request: NextRequest) {
       },
       body: JSON.stringify({
         from:
-          process.env.RESEND_FROM_EMAIL ||
-          "Lái Xe Thầy Tùng <onboarding@resend.dev>",
-        to: [process.env.ADMIN_EMAIL || "thaytunglaixin@gmail.com"],
+          process.env.RESEND_FROM_EMAIL || "notification@letungdaotaolaixe.com",
+        to: [process.env.ADMIN_EMAIL || "letungdaotaolaixe@gmail.com"],
         template: {
           id: "form-lai-xe",
           variables: templateVariables,
